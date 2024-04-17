@@ -4,7 +4,7 @@ sum_byte db 0             ; Reserved byte to store the sum
 
 section .text
     mov ecx, 5 ; Set the loop counter to the number of elements in the array
-    lea esi, [array_name] ; Load the address of the first element into ESI
+    lea esi, [my_array] ; Load the address of the first element into ESI
 
 .loop_start:
     ; Do something with [esi], the current element of the array
