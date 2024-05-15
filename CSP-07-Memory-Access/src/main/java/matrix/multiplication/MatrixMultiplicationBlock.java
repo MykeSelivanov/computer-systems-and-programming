@@ -6,9 +6,9 @@ public class MatrixMultiplicationBlock {
         int colsA = matrixA[0].length;
         int colsB = matrixB[0].length;
 
-        for (int i = 0; i < rowsA; i++) {
-            for (int j = 0; j < colsB; j++) {
-                for (int k = 0; k < colsA; k++) {
+        for (int i = 0; i < rowsA; i += blockSize) {
+            for (int j = 0; j < colsB; j += blockSize) {
+                for (int k = 0; k < colsA; k += blockSize) {
 
                     for (int ii = i; ii < Math.min(i + blockSize, rowsA); ii++) {
                         for (int jj = j; jj < Math.min(j + blockSize, colsB); jj++) {
