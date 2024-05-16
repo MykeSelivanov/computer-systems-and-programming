@@ -5,7 +5,7 @@ public class MatrixPrinter {
         System.out.println("Matrix " + name);
         for (int[] row : matrix) {
             for (int col: row) {
-                System.out.println(col + " ");
+                System.out.print(col + " ");
             }
             System.out.println();
         }
