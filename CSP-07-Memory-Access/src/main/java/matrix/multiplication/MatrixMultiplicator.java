@@ -63,7 +63,7 @@ public class MatrixMultiplicator {
                     for (int ii = i; ii < Math.min(i + blockSize, rowsA); ii++) {
                         for (int jj = j; jj < Math.min(j + blockSize, rowsB); jj++) {
                             for (int kk = k; kk < Math.min(k + blockSize, colsA); kk++) {
-                                result[ii][jj] += matrixA[ii][kk] + transposedMatrixB[jj][kk];
+                                result[ii][jj] += matrixA[ii][kk] * transposedMatrixB[jj][kk];
                             }
                         }
                     }
