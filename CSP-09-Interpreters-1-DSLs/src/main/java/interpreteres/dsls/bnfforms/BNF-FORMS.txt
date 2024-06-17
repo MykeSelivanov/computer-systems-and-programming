@@ -18,8 +18,30 @@
 9.3 BNF form for extended arithmetic logic
  5^3 + 6 * (45 - 3^2) - 4 / 2
 
-<power> ::= <number> "^" <number>
+<expr> ::= <term> | <expr> "+" <term> | <expr> "-" <term>
+<term> ::= <factor> | <term> "*" <factor> | <term> "/" <factor>
+<factor> ::= <number> | <power> | "("expr")"
+<power> ::= <base> "^" <exponent>
 <base> ::= <number> | "("<expr>")"
 <exponent> ::= <number> | "("<expr>")"
 <number> ::= <digit> | <number> <digit>
+<digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
+9.4 Support of exponents to our BNF form of a number
+ 1.0e-10, -2.71828e-2, 9.81e2
+
+<expr> ::= <term> | <expr> "+" <term> | <expr> "-" <term>
+<term> ::= <factor> | <term> "*" <factor> | <term> "/" <factor>
+<factor> ::= <number> | <power> | "(" <expr> ")"
+<power> ::= <base> "^" <exponent>
+<base> ::= <number> | "(" <expr> ")"
+<exponent> ::= <number> | "(" <expr> ")"
+<number> ::= <signed_number>
+<signed_number> ::= <sign> <unsigned_number>
+<sign> ::= "+" | "-" | ""
+<unsigned_number> ::= <integer> | <float> | <scientific>
+<integer> ::= <digit> | <integer> <digit>
+<float> ::= <integer> "." <integer>
+<scientific> ::= <integer> "e" <signed_integer> | <float> "e" <signed_integer>
+<signed_integer> ::= <sign> <integer>
 <digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
