@@ -1,0 +1,15 @@
+# Define configurations
+config "num_users" = 100
+config "request_rate" = 5.5
+config "timeout" = 30
+
+# Update configurations
+update "num_users" = 200
+update "request_rate" = 7.5
+
+# Perform computations
+compute "total_requests" = %num_users * %request_rate
+compute "total_timeout" = %num_users * %timeout
+
+# Show all configurations
+show configs
