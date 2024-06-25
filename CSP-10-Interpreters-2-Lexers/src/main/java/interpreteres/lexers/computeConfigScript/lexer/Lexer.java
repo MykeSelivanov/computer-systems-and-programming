@@ -38,7 +38,13 @@ public class Lexer implements Iterable<Lexer.Token> {
                     current++;
                     break;
                 case '"':
-                    tokens.add(new Token(TokenType.STRING, readString()));
+                    String str = readString();
+                    tokens.add(
+                            new Token(
+                                    str.contains("%") ? TokenType.DYNAMIC_STRING : TokenType.STRING,
+                                    str
+                            )
+                    );
                     current++;
                     break;
                 case '%':
@@ -64,6 +70,8 @@ public class Lexer implements Iterable<Lexer.Token> {
             case "compute" -> TokenType.COMPUTE;
             case "show" -> TokenType.SHOW;
             case "configs" -> TokenType.CONFIGS;
+            case "loop" -> TokenType.LOOP;
+
             default -> TokenType.IDENTIFIER;
         };
     }
@@ -142,6 +150,6 @@ public class Lexer implements Iterable<Lexer.Token> {
     }
 
     public enum TokenType {
-        CONFIG, UPDATE, COMPUTE, SHOW, CONFIGS, STRING, NUMBER, IDENTIFIER, ASSIGNMENT, REFERENCES, OPERATOR
+        CONFIG, UPDATE, COMPUTE, SHOW, CONFIGS, STRING, DYNAMIC_STRING, NUMBER, IDENTIFIER, ASSIGNMENT, REFERENCES, OPERATOR, LOOP,
     }
 }
