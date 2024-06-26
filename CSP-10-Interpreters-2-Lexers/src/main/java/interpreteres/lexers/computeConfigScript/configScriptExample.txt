@@ -13,3 +13,15 @@ compute "total_timeout" = %num_users * %timeout
 
 # Show all configurations
 show configs
+
+# Loop statement
+loop "i" from 1 to 5
+    compute "iteration_result_%i" = %num_users * %i
+end
+
+# Conditional statement
+if %num_users > 1000
+    update "status" = "high load"
+else
+    update "status" = "normal load"
+end

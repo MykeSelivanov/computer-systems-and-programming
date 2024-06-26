@@ -27,8 +27,39 @@ public class Lexer implements Iterable<Lexer.Token> {
                     current++;
                     break;
                 case '=':
-                    tokens.add(new Token(TokenType.ASSIGNMENT, "="));
-                    current++;
+                    if (peek() == '=') {
+                        tokens.add(new Token(TokenType.EQUAL, "=="));
+                        current += 2;
+                    } else {
+                        tokens.add(new Token(TokenType.ASSIGNMENT, "="));
+                        current++;
+                    }
+                    break;
+                case '!':
+                    if (peek() == '=') {
+                        tokens.add(new Token(TokenType.NOT_EQUAL, "!="));
+                        current += 2;
+                    } else {
+                        throw new LexerException("Unsupported character: " + ch);
+                    }
+                    break;
+                case '>':
+                    if (peek() == '=') {
+                        tokens.add(new Token(TokenType.GREATER_EQUAL, ">="));
+                        current += 2;
+                    } else {
+                        tokens.add(new Token(TokenType.GREATER_THAN, ">"));
+                        current++;
+                    }
+                    break;
+                case '<':
+                    if (peek() == '=') {
+                        tokens.add(new Token(TokenType.LESS_EQUAL, "<="));
+                        current += 2;
+                    } else {
+                        tokens.add(new Token(TokenType.LESS_THAN, "<"));
+                        current++;
+                    }
                     break;
                 case '+':
                 case '-':
@@ -63,6 +94,10 @@ public class Lexer implements Iterable<Lexer.Token> {
         }
     }
 
+    private char peek() {
+        return (current + 1 < input.length()) ? input.charAt(current + 1) : '\0';
+    }
+
     private TokenType deriveTokenType(String identifier) {
         return switch (identifier) {
             case "config" -> TokenType.CONFIG;
@@ -71,7 +106,11 @@ public class Lexer implements Iterable<Lexer.Token> {
             case "show" -> TokenType.SHOW;
             case "configs" -> TokenType.CONFIGS;
             case "loop" -> TokenType.LOOP;
-
+            case "from" -> TokenType.FROM;
+            case "to" -> TokenType.TO;
+            case "end" -> TokenType.END;
+            case "if" -> TokenType.IF;
+            case "else" -> TokenType.ELSE;
             default -> TokenType.IDENTIFIER;
         };
     }
@@ -150,6 +189,7 @@ public class Lexer implements Iterable<Lexer.Token> {
     }
 
     public enum TokenType {
-        CONFIG, UPDATE, COMPUTE, SHOW, CONFIGS, STRING, DYNAMIC_STRING, NUMBER, IDENTIFIER, ASSIGNMENT, REFERENCES, OPERATOR, LOOP,
+        CONFIG, UPDATE, COMPUTE, SHOW, CONFIGS, STRING, DYNAMIC_STRING, NUMBER, IDENTIFIER, ASSIGNMENT, REFERENCES,
+        OPERATOR, LOOP, FROM, TO, END, IF, ELSE, EQUAL, NOT_EQUAL, GREATER_THAN, GREATER_EQUAL, LESS_THAN, LESS_EQUAL,
     }
 }

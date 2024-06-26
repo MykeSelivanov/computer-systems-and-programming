@@ -6,6 +6,17 @@
                 | <show_statement>
                 | <loop_statement>
                 | <conditional_statement>
+                | <if_statement>
+
+<if_statement> ::= "if" <condition> <program> <else_statement>? "end"
+
+<else_statement> ::= "else" <program>
+
+<condition> ::= <value> <comparison> <value>
+
+<value> ::= <number> | <string> | <dynamic_string> | "%" <identifier>
+
+<comparison> ::= "<" | ">" | "==" | "<=" | ">=" | "!="
 
 <loop_statement> ::= "loop" <string> "from" <number> "to" <number> "\n" <loop_body> "end"
 
