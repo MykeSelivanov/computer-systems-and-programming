@@ -1,27 +1,40 @@
 package interpreter.parsers.parserExample;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.text.ParseException;
+import java.util.List;
+
 public class Parser {
-    abstract class ASTNode {
+    private final List<Token> tokens;
+    private int currentPos;
+    private Token currentToken;
 
+    Parser(List<Token> tokens) {
+        this.tokens = tokens;
+        currentPos = 0;
+        currentToken = tokens.get(currentPos);
     }
 
-    class Number extends ASTNode {
-        Token numberToken;
+    public ASTNode parse() {
+        return term();
+    }
 
-        public Number(Token numberToken) {
-            this.numberToken = numberToken;
+    private ASTNode term() {
+        ASTNode factor = factor();
+
+        while (currentToken != null || currentToken.type == Token.Type.MULTIPLY || currentToken.type == Token.Type.DIVIDE) {
+            consume(currentToken.type);
         }
     }
 
-    class BinaryOp extends ASTNode {
-        ASTNode left;
-        ASTNode right;
-        Token operationToken;
+    private void consume(Token.Type type) {
+        if (currentToken.type == type) {
 
-        public BinaryOp(ASTNode left, ASTNode right, Token operationToken) {
-            this.left = left;
-            this.right = right;
-            this.operationToken = operationToken;
+        } else {
+            throw new ParserException("Unexpected token: " + type);
         }
+    }
+
+    private ASTNode factor() {
     }
 }
