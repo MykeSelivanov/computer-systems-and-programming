@@ -42,6 +42,8 @@ public class Parser {
     }
 
     private ASTNode factor() {
-        return null;
+        Token token = currentToken;
+        consume(Token.Type.NUMBER);
+        return new NumberNode(token);
     }
 }

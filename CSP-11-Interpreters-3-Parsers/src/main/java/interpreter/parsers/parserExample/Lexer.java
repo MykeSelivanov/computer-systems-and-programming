@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Lexer {
     public static List<Token> getHardcodedTokens() {
+
+        // 3 * 5 * 10 * 4
         return Arrays.asList(
                 new Token(Token.Type.NUMBER, "3"),
                 new Token(Token.Type.MULTIPLY, "*"),

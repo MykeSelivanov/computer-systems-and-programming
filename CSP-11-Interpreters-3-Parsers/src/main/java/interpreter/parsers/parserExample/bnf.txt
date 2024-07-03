@@ -1,0 +1,25 @@
+Expression:
+for “3 + 5 * (10 - 4)” Lexer produced this:
+Tokens:
+Token{type=NUMBER, value='3'}
+Token{type=PLUS, value='+'}
+Token{type=NUMBER, value='5'}
+Token{type=MULTIPLY, value='*'}
+Token{type=LPAREN, value='('}
+Token{type=NUMBER, value='10'}
+Token{type=MINUS, value='-'}
+Token{type=NUMBER, value='4'}
+Token{type=RPAREN, value=')'}
+
+BNF for arithmetic expressions
+<expression> ::= <term> | <term> "+" <expression> | <term> "-" <expression>
+<term> ::= <factor> | <factor> "*" <term> | <factor> "/" <term>
+<factor> ::= <number> | "(" <expression> ")"
+
+Simplified Parser that will support only "*" and "/"
+Support only “*” and “/”
+BNF:
+<expression> ::= <term>
+<term> ::= <factor> | <factor> "*" <term> | <factor> "/" <term>
+<factor> ::= <number>
+
