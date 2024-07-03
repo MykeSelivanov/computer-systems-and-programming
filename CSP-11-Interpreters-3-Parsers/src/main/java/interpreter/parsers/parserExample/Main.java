@@ -1,7 +1,13 @@
 package interpreter.parsers.parserExample;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello");
+        List<Token> tokens = Lexer.getHardcodedTokens();
+        Parser parser = new Parser(tokens);
+        ASTNode root = parser.parse();
+
+        root.print("  ");
     }
 }
