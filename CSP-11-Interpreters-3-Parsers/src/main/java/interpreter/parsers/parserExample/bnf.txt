@@ -23,3 +23,8 @@ BNF:
 <term> ::= <factor> | <factor> "*" <term> | <factor> "/" <term>
 <factor> ::= <number>
 
+Parser with added "+" and "-" support
+<expression> ::= <term> | <term> "+" <expression> | <term> "-" <expression>
+<term> ::= <factor> | <factor> "*" <term> | <factor> "/" <term>
+<factor> ::= <number>
+

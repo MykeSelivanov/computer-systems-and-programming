@@ -14,6 +14,11 @@ public class Parser {
     }
 
     public ASTNode parse() {
+        return expression();
+    }
+
+    private ASTNode expression() {
+
         return term();
     }
 
