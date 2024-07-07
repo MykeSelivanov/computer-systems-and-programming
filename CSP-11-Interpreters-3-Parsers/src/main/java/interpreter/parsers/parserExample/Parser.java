@@ -18,8 +18,14 @@ public class Parser {
     }
 
     private ASTNode expression() {
+        ASTNode node = term();
 
-        return term();
+        while (currentToken != null && (currentToken.type == Token.Type.PLUS || currentToken.type == Token.Type.MINUS)) {
+            Token token = currentToken;
+            consume(currentToken.type);
+            node = new BinaryOpNode(node, term(), token);
+        }
+        return node;
     }
 
     private ASTNode term() {
@@ -42,13 +48,24 @@ public class Parser {
                 currentToken = null;
             }
         } else {
-            throw new ParserException("Unexpected token: " + type);
+            throw new ParserException("Unexpected token: " + currentToken + " expected: " + type);
         }
     }
 
     private ASTNode factor() {
         Token token = currentToken;
-        consume(Token.Type.NUMBER);
-        return new NumberNode(token);
+
+        if (token.type == Token.Type.NUMBER) {
+            consume(Token.Type.NUMBER);
+            return new NumberNode(token);
+        }
+
+        if (token.type == Token.Type.LPAREN) {
+            consume(Token.Type.LPAREN);
+            ASTNode node = expression();
+            consume(Token.Type.RPAREN);
+            return node;
+        }
+        throw new ParserException("Unexpected token found for Factor: " + token);
     }
 }

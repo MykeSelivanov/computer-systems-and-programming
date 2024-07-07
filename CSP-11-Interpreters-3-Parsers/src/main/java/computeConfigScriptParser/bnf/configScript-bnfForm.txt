@@ -1,0 +1,47 @@
+<program> ::= <statement>*
+
+<statement> ::= <config_statement>
+                | <update_statement>
+                | <compute_statement>
+                | <show_statement>
+                | <loop_statement>
+                | <conditional_statement>
+                | <if_statement>
+
+<if_statement> ::= "if" <condition> <program> <else_statement>? "end"
+
+<else_statement> ::= "else" <program>
+
+<condition> ::= <value> <comparison> <value>
+
+<value> ::= <number> | <string> | <dynamic_string> | "%" <identifier>
+
+<comparison> ::= "<" | ">" | "==" | "<=" | ">=" | "!="
+
+<loop_statement> ::= "loop" <string> "from" <number> "to" <number> "\n" <loop_body> "end"
+
+<loop_body> ::= <statement>*
+
+<config_statement> ::= "config" <string> "=" <number>
+
+<update_statement> ::= "update" <string> "=" <number>
+
+<compute_statement> ::= "compute" <string> "=" "%" <identifier> <operator> "%" <identifier>
+
+<show_statement> ::= "show" "configs"
+
+<operator> ::= "+" | "-" | "*" | "/"
+
+<dynamic_string> ::= "\"" <identifier> "%" <identifier> "\""
+
+<string> ::= "\"" <identifier> "\""
+
+<identifier> ::= <letter> <alphanumeric>*
+
+<number> ::= <digit>+ ("."<digit>+)?
+
+<letter> ::= [a-zA-Z]
+
+<digit> ::= [0-9]
+
+<alphanumeric> ::= <letter> | <digit>

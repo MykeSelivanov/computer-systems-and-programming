@@ -2,7 +2,7 @@ package interpreter.parsers.parserExample;
 
 public class Token {
     public enum Type {
-        NUMBER, MULTIPLY, DIVIDE, // PLUS, MINUS, LPAREN, RPAREN
+        NUMBER, MULTIPLY, DIVIDE, PLUS, MINUS, LPAREN, RPAREN
     }
 
     public final Type type;
