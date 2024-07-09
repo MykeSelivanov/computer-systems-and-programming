@@ -1,0 +1,19 @@
+<program> ::= <statement> | <program> <separator> <statement>
+
+<statement> ::= <expr> | <block> | <declaration> | <assignment>
+
+<declaration> ::= "var" <identifier> "=" <expression>
+
+<assignment> ::= <identifier> “=” <expression>
+
+<block> ::= "{" <program> "}"
+
+<separator> ::= "\n" | ";"
+
+<expression> ::= <term> | <term> "+" <expression> | <term> "-" <expression>
+
+<term> ::= <factor> | <factor> "*" <term> | <factor> "/" <term>
+
+<factor> ::= <number> | <identifier> | "(" <expression> ")"
+
+<identifier> ::= <letter> | <identifier> <letter_or_digit>
