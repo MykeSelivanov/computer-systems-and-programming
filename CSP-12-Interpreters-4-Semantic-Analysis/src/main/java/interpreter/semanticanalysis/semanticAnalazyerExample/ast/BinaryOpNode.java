@@ -12,7 +12,7 @@ public class BinaryOpNode extends ASTNode {
     }
 
     public void print(String indent) {
-        System.out.println(indent +  "Op{" + operationToken.value + "}");
+        System.out.println(indent + "Op{" + operationToken.value + "}");
         left.print(indent + indent);
         right.print(indent + indent);
     }

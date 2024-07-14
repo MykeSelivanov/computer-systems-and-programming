@@ -7,8 +7,29 @@ import java.util.List;
 
 public class Lexer {
     private final String input;
-    private final List<Token> tokens;
-    private int currentChar;
+    private int currentPos;
+    private char currentChar;
+
+    public Lexer(String input) {
+        this.input = input;
+        this.currentPos = 0;
+        this.currentChar = input.length() > 0 ? input.charAt(currentPos) : '\0';
+    }
+
+    private void advance() {
+        currentPos++;
+        if (currentPos >= input.length()) {
+            currentChar = '\0'; // End of input
+        } else {
+            currentChar = input.charAt(currentPos);
+        }
+    }
+
+    private void skipWhitespace() {
+        while (currentChar != '\0' && Character.isWhitespace(currentChar)) {
+            advance();
+        }
+    }
 
     private Token number() {
         StringBuilder result = new StringBuilder();
@@ -19,16 +40,31 @@ public class Lexer {
         return new Token(Token.Type.NUMBER, result.toString());
     }
 
-    private Token identifier() {
-        StringBuilder result = new StringBuilder();
-        while (currentChar != '\0' && Character.isLetterOrDigit(currentChar)) {
-            result.append(currentChar);
-            advance();
-        }
-        return new Token(Token.Type.IDENTIFIER, result.toString());
+//    private Token identifier() {
+//        StringBuilder result = new StringBuilder();
+//        while (currentChar != '\0' && Character.isLetterOrDigit(currentChar)) {
+//            result.append(currentChar);
+//            advance();
+//        }
+//        return new Token(Token.Type.IDENTIFIER, result.toString());
+//    }
+private Token identifier() {
+    StringBuilder result = new StringBuilder();
+    while (currentChar != '\0' && Character.isLetterOrDigit(currentChar)) {
+        result.append(currentChar);
+        advance();
     }
+    String value = result.toString();
+    if (value.equals("var")) {
+        return new Token(Token.Type.VAR, "var");
+    } else if (value.equals("const")) {
+        return new Token(Token.Type.CONST, "const");
+    } else {
+        return new Token(Token.Type.IDENTIFIER, value);
+    }
+}
 
-    List<Token> tokenize() {
+    public List<Token> tokenize() {
         List<Token> tokens = new ArrayList<>();
         while (currentChar != '\0') {
             if (Character.isWhitespace(currentChar)) {
@@ -80,11 +116,11 @@ public class Lexer {
                     tokens.add(new Token(Token.Type.SEMICOLON, ";"));
                     break;
                 default:
-                    throw new RuntimeException("Unexpected character:" + currentChar);
+                    throw new RuntimeException("Unexpected character: " + currentChar);
             }
             advance();
         }
         return tokens;
     }
-
 }
+
