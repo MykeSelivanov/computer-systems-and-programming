@@ -1,9 +1,9 @@
 package interpreter.semanticanalysis.semanticAnalazyerExample.ast;
 
 public class VarDecl extends ASTNode {
-    Var varNode;
-    ASTNode expr;
-    boolean isConst;
+    public Var varNode;
+    public ASTNode expr;
+    public boolean isConst;
 
     public VarDecl(Var varNode, ASTNode expr, boolean isConst) {
         this.varNode = varNode;

@@ -1,8 +1,8 @@
 package interpreter.semanticanalysis.semanticAnalazyerExample.ast;
 
 public class NumberNode extends ASTNode {
-    final int value;
-    Token numberToken;
+    public final int value;
+    public Token numberToken;
 
     public NumberNode(Token numberToken) {
         this.numberToken = numberToken;
