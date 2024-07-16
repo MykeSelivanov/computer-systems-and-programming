@@ -39,15 +39,7 @@ public class Lexer {
         }
         return new Token(Token.Type.NUMBER, result.toString());
     }
-
-//    private Token identifier() {
-//        StringBuilder result = new StringBuilder();
-//        while (currentChar != '\0' && Character.isLetterOrDigit(currentChar)) {
-//            result.append(currentChar);
-//            advance();
-//        }
-//        return new Token(Token.Type.IDENTIFIER, result.toString());
-//    }
+    
 private Token identifier() {
     StringBuilder result = new StringBuilder();
     while (currentChar != '\0' && Character.isLetterOrDigit(currentChar)) {
