@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>oop.errorhandling</groupId>
-    <artifactId>CSP-19-OOP-Error-Handling</artifactId>
+    <artifactId>CSP-18-OOP-Error-Handling</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
