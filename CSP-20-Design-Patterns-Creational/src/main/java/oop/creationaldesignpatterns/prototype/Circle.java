@@ -14,7 +14,7 @@ public class Circle implements Shape{
         clone.y = this.y;
         clone.radius = this.radius;
         clone.color = this.color;
-
+        return clone;
     }
 
     @Override
