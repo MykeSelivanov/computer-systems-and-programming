@@ -1,6 +1,7 @@
 package oop.creationaldesignpatterns.homeworkCache;
 
 import oop.creationaldesignpatterns.homeworkCache.cacheImpl.CacheTypeEnum;
+import oop.creationaldesignpatterns.homeworkCache.cacheImpl.lfu.LFUCache;
 
 import java.text.MessageFormat;
 
