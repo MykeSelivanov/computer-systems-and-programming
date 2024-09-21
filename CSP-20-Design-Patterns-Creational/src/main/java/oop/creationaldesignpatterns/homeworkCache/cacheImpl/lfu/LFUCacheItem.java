@@ -36,4 +36,5 @@ public class LFUCacheItem {
     public void setFrequency(int frequency) {
         this.frequency = frequency;
     }
+
 }
