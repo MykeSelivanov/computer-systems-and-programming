@@ -7,7 +7,17 @@ public class LFUCacheBuilder {
         lfuCache = new LFUCache();
     }
 
-    public LFUCacheBuilder setCapacity(int capacity){
+    public LFUCacheBuilder setCapacity(int capacity) {
+        lfuCache.setCapacity(capacity);
+        return this;
+    }
 
+    public LFUCacheBuilder setServerName(String serverName) {
+        lfuCache.setServerName(serverName);
+        return this;
+    }
+
+    public LFUCache build() {
+        return lfuCache;
     }
 }
