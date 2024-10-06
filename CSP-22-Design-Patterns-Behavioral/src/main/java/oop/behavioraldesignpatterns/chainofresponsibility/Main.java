@@ -19,5 +19,6 @@ public class Main {
             // process the request
             atmDispenser.chain1.dispense(new Currency(amount));
         }
+
     }
 }
