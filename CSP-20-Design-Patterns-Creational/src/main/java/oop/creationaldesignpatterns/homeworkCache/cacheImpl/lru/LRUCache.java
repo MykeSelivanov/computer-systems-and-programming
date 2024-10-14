@@ -6,14 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LRUCache implements ICache {
-    private int capcity;
+    private int capacity;
     private String serverName;
     private final Map<String, LRUCacheItem> keyToCacheMap;
     private LRUCacheItem head, tail;
     private int size;
 
-    public void setCapcity(int capcity) {
-        this.capcity = capcity;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public void setServerName(String serverName) {
@@ -21,7 +21,7 @@ public class LRUCache implements ICache {
     }
 
     public LRUCache() {
-        this.capcity = capcity;
+        this.capacity = capacity;
         this.keyToCacheMap = new HashMap<>();
         this.size = 0;
         // Create dummy head and tail
@@ -32,7 +32,7 @@ public class LRUCache implements ICache {
     }
 
     // add most recently used item to the front
-    private void addToFront(LRUCacheItem item) {
+    private void addToLRUTrackingListFront(LRUCacheItem item) {
         item.next = head.next;
         item.previous = head;
         head.next.previous = item;
@@ -41,17 +41,17 @@ public class LRUCache implements ICache {
     }
 
     // remove item from the list
-    private void remove(LRUCacheItem item) {
+    private void removeFromLRUTrackingList(LRUCacheItem item) {
         item.previous.next = item.next;
         item.next.previous = item.previous;
         size--;
     }
 
     // remove the least recently used item
-    private LRUCacheItem removeLast() {
+    private LRUCacheItem removeLastFromLRUTrackingList() {
         if (size == 0) return null;
         LRUCacheItem lastItem = tail.previous;
-        remove(lastItem);
+        removeFromLRUTrackingList(lastItem);
         return lastItem;
     }
 
@@ -61,18 +61,18 @@ public class LRUCache implements ICache {
             // if item with this key already exists, update the value
             LRUCacheItem existingItem = keyToCacheMap.get(key);
             existingItem.setValue(value);
-            remove(existingItem);
-            addToFront(existingItem);
+            removeFromLRUTrackingList(existingItem);
+            addToLRUTrackingListFront(existingItem);
         } else {
-            while (size >= capcity) {
+            while (size >= capacity) {
                 // remove the least recently used item
-                LRUCacheItem leastRecentlyUsed = removeLast();
+                LRUCacheItem leastRecentlyUsed = removeLastFromLRUTrackingList();
                 if (leastRecentlyUsed != null) {
                     keyToCacheMap.remove(leastRecentlyUsed.getKey());
                 }
             }
             LRUCacheItem itemToAdd = new LRUCacheItem(key, value);
-            addToFront(itemToAdd);
+            addToLRUTrackingListFront(itemToAdd);
             keyToCacheMap.put(key, itemToAdd);
         }
     }
@@ -83,8 +83,8 @@ public class LRUCache implements ICache {
             return null;
         }
         LRUCacheItem item = keyToCacheMap.get(key);
-        remove(item);
-        addToFront(item);
+        removeFromLRUTrackingList(item);
+        addToLRUTrackingListFront(item);
         return item.getValue();
     }
 
@@ -92,7 +92,7 @@ public class LRUCache implements ICache {
     public void remove(String key) {
         if (keyToCacheMap.containsKey(key)) {
             LRUCacheItem item = keyToCacheMap.get(key);
-            remove(item);
+            removeFromLRUTrackingList(item);
             keyToCacheMap.remove(key);
         }
     }

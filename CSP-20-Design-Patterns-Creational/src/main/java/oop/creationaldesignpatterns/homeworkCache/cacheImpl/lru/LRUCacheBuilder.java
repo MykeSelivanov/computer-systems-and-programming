@@ -8,7 +8,7 @@ public class LRUCacheBuilder {
     }
 
     public LRUCacheBuilder setCapacity(int capacity) {
-        lruCache.setCapcity(capacity);
+        lruCache.setCapacity(capacity);
         return this;
     }
 
