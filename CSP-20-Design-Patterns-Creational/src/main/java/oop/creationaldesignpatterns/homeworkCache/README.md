@@ -10,6 +10,7 @@ This repository demonstrates the use of various **caching mechanisms** (FIFO, LF
     - [LFU Cache](#lfu-cache)
     - [LRU Cache](#lru-cache)
 - [Design Patterns Used](#design-patterns-used)
+- [How to Run the Tests](#how-to-run-the-tests)
 
 ## Overview
 
@@ -56,3 +57,12 @@ The **LRU (Least Recently Used)** cache evicts the least recently accessed entry
 - **Factory Pattern**: The `CacheFactory` is used to instantiate caches dynamically based on the cache type (FIFO, LFU, LRU).
 - **Builder Pattern**: Both LFU and LRU caches can be built using a builder for easier configuration.
 - **Singleton Pattern**: The `CacheFactory` ensures only one instance of a cache is created per type.
+
+## How to Run the Tests
+The Main class contains methods to test the various cache mechanisms and design patterns.
+<br>Uncomment the relevant test method in the main function to observe the behavior of different cache implementations.
+
+### Test Methods
+- `testLFUCache()`: Tests the LFU cache use.
+- `testFIFOCache()`: Tests FIFO cache.
+- `testLRUCache()`: Tests LRU cache.
