@@ -61,14 +61,10 @@ public class Main {
         cache.get("key1");
         cache.put("key4", 4);
 
-
         System.out.println(cache.get("key4"));
         System.out.println(cache.get("key1"));
         System.out.println(cache.get("key3"));
         // Should be null
         System.out.println(cache.get("key2"));
     }
-
-
-
 }
