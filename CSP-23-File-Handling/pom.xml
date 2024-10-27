@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>oop.filehandling1</groupId>
-    <artifactId>CSP-23-File-Handling-1</artifactId>
+    <artifactId>CSP-23-File-Handling</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
