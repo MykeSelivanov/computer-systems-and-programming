@@ -3,62 +3,93 @@ package oop.filebaseddatabase.repository;
 import oop.filebaseddatabase.entities.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class DbSet implements Serializable {
-    private List<Academy> academies;
-    private List<Mentor> mentors;
-    private List<Course> courses;
-    private List<Group> groups;
-    private List<MentorsToCourses> mentorsToCourses;
+    private Map<Integer,Academy> academies;
+    private Map<Integer,Mentor> mentors;
+    private Map<Integer,Course> courses;
+    private Map<Integer,Group> groups;
+    private Map<Integer,MentorsToCourses> mentorsToCourses;
+
+    // secondary indexes - non-clustered indexes
+    // academyId is non clustered index, and in set we store indices of groups
+    private Map<Integer, Set<Integer>> academyGroupAcademyIndex;
 
     public DbSet() {
-        this.academies = new ArrayList<>();
-        this.mentors = new ArrayList<>();
-        this.courses = new ArrayList<>();
-        this.groups = new ArrayList<>();
-        this.mentorsToCourses = new ArrayList<>();
+        this.academies = new HashMap<>();
+        this.mentors = new HashMap<>();
+        this.courses = new HashMap<>();
+        this.groups = new HashMap<>();
+        this.mentorsToCourses = new HashMap<>();
+        this.academyGroupAcademyIndex = new TreeMap<>();
     }
 
     // to not lose ownership on private lists we send a copy of the lists
-    public List<Academy> getAcademies() {
-        return new ArrayList<>(academies);
+    public Map<Integer,Academy> getAcademies() {
+        return new HashMap<>(academies);
     }
 
-    public void setAcademies(List<Academy> academies) {
+    public void setAcademies(Map<Integer,Academy> academies) {
         this.academies = academies;
     }
 
-    public List<Mentor> getMentors() {
-        return new ArrayList<>(mentors);
+    public Map<Integer,Mentor> getMentors() {
+        return new HashMap<>(mentors);
     }
 
-    public void setMentors(List<Mentor> mentors) {
+    public void setMentors(Map<Integer,Mentor> mentors) {
         this.mentors = mentors;
     }
 
-    public List<Course> getCourses() {
-        return new ArrayList<>(courses);
+    public Map<Integer,Course> getCourses() {
+        return new HashMap<>(courses);
     }
 
-    public void setCourses(List<Course> courses) {
+    public void setCoursesMap(Map<Integer,Course> courses) {
         this.courses = courses;
     }
 
-    public List<Group> getGroups() {
-        return new ArrayList<>(groups);
+    public Map<Integer,Group> getGroups() {
+        return new HashMap<>(groups);
     }
 
-    public void setGroups(List<Group> groups) {
+    public void setGroupsMap(Map<Integer,Group> groups) {
         this.groups = groups;
     }
 
-    public List<MentorsToCourses> getMentorsToCourses() {
-        return new ArrayList<>(mentorsToCourses);
+    public Map<Integer,MentorsToCourses> getMentorsToCourses() {
+        return new HashMap<>(mentorsToCourses);
     }
 
-    public void setMentorsToCourses(List<MentorsToCourses> mentorsToCourses) {
+    public void setMentorsToCoursesMap(Map<Integer,MentorsToCourses> mentorsToCourses) {
         this.mentorsToCourses = mentorsToCourses;
+    }
+
+    public void addAcademy(Academy newAcademy) {
+        academies.put(newAcademy.getId(), newAcademy);
+    }
+
+    public Academy getAcademy(int id) {
+        return academies.get(id);
+    }
+
+    public void addAGroup(Group newGroup) {
+        groups.put(newGroup.getId(), newGroup);
+        Set<Integer> academyGroupIds = academyGroupAcademyIndex.getOrDefault(newGroup.getAcademyId(), new HashSet<>());
+        academyGroupIds.add(newGroup.getId());
+        academyGroupAcademyIndex.put(newGroup.getAcademyId(), academyGroupIds);
+    }
+
+    // SELECT groupName FROM Group WHERE AcademyId=1
+    public List<Group> getGroupsByAcademyId(int academyId) {
+        List<Group> groupsByAcademyId = new ArrayList<>();
+        Set<Integer> academyGroupsIds = academyGroupAcademyIndex.get(academyId);
+        if (academyGroupsIds != null) {
+            for (int academyGroupId: academyGroupsIds) {
+                groupsByAcademyId.add(this.groups.get(academyGroupId));
+            }
+        }
+        return groupsByAcademyId;
     }
 }

@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Course implements Serializable {
     private int id;
     private String name;
+    private transient double price;
     private int academyId;
 
     public Course(int id, String name, int academyId) {
@@ -35,5 +36,13 @@ public class Course implements Serializable {
 
     public void setName(String groupName) {
         this.name = groupName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
