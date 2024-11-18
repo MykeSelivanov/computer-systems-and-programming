@@ -3,27 +3,29 @@ package oop.filebaseddatabase.entities;
 import java.io.Serializable;
 
 public class Academy implements Serializable {
-    private int id;
+    private String id;
     private String description;
 
-    public Academy(int id, String description) {
-        this.id = id;
+    public Academy(String description) {
         this.description = description;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id=id;
     }
 
     public String getDescription() {
         return description;
     }
+    public void setDescription(String description) {
+        this.description=description;
+    }
 
-    public void setDescription(String groupName) {
-        this.description = groupName;
+    @Override
+    public String toString() {
+        return getId() + " " + getDescription();
     }
 }

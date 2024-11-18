@@ -2,13 +2,13 @@ package oop.filebaseddatabase.entities;
 
 import java.io.Serializable;
 
-public class Mentor implements Serializable{
+public class AcademyGroup implements Serializable{
     private String id;
-    private String name;
+    private String groupName;
     private String academyId;
 
-    public Mentor(String name, String academyId) {
-        this.name = name;
+    public AcademyGroup(String groupName, String academyId){
+        this.groupName = groupName;
         this.academyId = academyId;
     }
 
@@ -19,11 +19,11 @@ public class Mentor implements Serializable{
         this.id=id;
     }
 
-    public String getName() {
-        return name;
+    public String getGroupName() {
+        return groupName;
     }
-    public void setName(String name) {
-        this.name=name;
+    public void setGroupName(String groupName) {
+        this.groupName=groupName;
     }
 
     public String getAcademyId() {
@@ -35,6 +35,6 @@ public class Mentor implements Serializable{
 
     @Override
     public String toString() {
-        return getId() + " " + getName();
+        return getId() + " " + getGroupName();
     }
 }

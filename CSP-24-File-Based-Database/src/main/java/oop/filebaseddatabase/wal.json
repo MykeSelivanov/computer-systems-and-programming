@@ -1,0 +1,10 @@
+{"operationType":"ADD","entity":{"description":"GrowthHungry Academy 1"},"id":"758414af-1f88-4524-8f24-121176dbdb2f","className":"Academy"}
+{"operationType":"ADD","entity":{"id":"eb297bc0-2a59-4552-b105-e98d6ea19559","groupName":"group 2024","academyId":"758414af-1f88-4524-8f24-121176dbdb2f"},"id":"eb297bc0-2a59-4552-b105-e98d6ea19559","className":"AcademyGroup"}
+{"operationType":"UPDATE","entity":{"id":"eb297bc0-2a59-4552-b105-e98d6ea19559","groupName":"group 2024 is the best","academyId":"758414af-1f88-4524-8f24-121176dbdb2f"},"className":"AcademyGroup"}
+{"operationType":"ADD","entity":{"id":"6edcf56b-2213-4675-972d-46e864b81d81","groupName":"group 2025","academyId":"758414af-1f88-4524-8f24-121176dbdb2f"},"id":"6edcf56b-2213-4675-972d-46e864b81d81","className":"AcademyGroup"}
+{"operationType":"REMOVE","id":"6edcf56b-2213-4675-972d-46e864b81d81","className":"RepositoryWALDecorator"}
+{"operationType":"ADD","entity":{"id":"004e9daa-5ef6-4f17-9360-37f34f11e948","name":"Computer Science","academyId":"758414af-1f88-4524-8f24-121176dbdb2f"},"id":"004e9daa-5ef6-4f17-9360-37f34f11e948","className":"Course"}
+{"operationType":"ADD","entity":{"id":"9566595e-85f3-4c9d-8851-b1aceb0201b5","name":"Algorithms","academyId":"758414af-1f88-4524-8f24-121176dbdb2f"},"id":"9566595e-85f3-4c9d-8851-b1aceb0201b5","className":"Course"}
+{"operationType":"ADD","entity":{"id":"a834e8b7-4cba-4715-8ddb-00815751cc9a","name":"Nurbek Akparaliev","academyId":"758414af-1f88-4524-8f24-121176dbdb2f"},"id":"a834e8b7-4cba-4715-8ddb-00815751cc9a","className":"Mentor"}
+{"operationType":"ADD","entity":{"id":"23dafe43-0daa-42e1-9a9e-c321eb338fb2","name":"Dastan Telnov","academyId":"758414af-1f88-4524-8f24-121176dbdb2f"},"id":"23dafe43-0daa-42e1-9a9e-c321eb338fb2","className":"Mentor"}
+{"operationType":"ADD","entity":{"id":"08a610f3-f333-452d-81c0-88be9b62f2d0","name":"Scott Miles","academyId":"758414af-1f88-4524-8f24-121176dbdb2f"},"id":"08a610f3-f333-452d-81c0-88be9b62f2d0","className":"Mentor"}

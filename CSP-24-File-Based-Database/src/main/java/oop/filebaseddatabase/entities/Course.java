@@ -3,46 +3,38 @@ package oop.filebaseddatabase.entities;
 import java.io.Serializable;
 
 public class Course implements Serializable {
-    private int id;
+    private String id;
     private String name;
-    private transient double price;
-    private int academyId;
+    private String academyId;
 
-    public Course(int id, String name, int academyId) {
-        this.id = id;
+    public Course(String name, String academyId) {
         this.name = name;
         this.academyId = academyId;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getAcademyId() {
-        return academyId;
-    }
-
-    public void setAcademyId(int academyId) {
-        this.academyId = academyId;
+    public void setId(String id) {
+        this.id=id;
     }
 
     public String getName() {
         return name;
     }
-
-    public void setName(String groupName) {
-        this.name = groupName;
+    public void setName(String name) {
+        this.name=name;
     }
 
-    public double getPrice() {
-        return price;
+    public String getAcademyId() {
+        return academyId;
+    }
+    public void setAcademyId(String academyId) {
+        this.academyId=academyId;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    @Override
+    public String toString() {
+        return getId() + " " + getName();
     }
 }

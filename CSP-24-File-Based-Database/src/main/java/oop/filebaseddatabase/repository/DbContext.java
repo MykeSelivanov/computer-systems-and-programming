@@ -4,50 +4,37 @@ import java.io.*;
 
 public class DbContext {
     private final String FILENAME;
-    private boolean containsNewChanges; // it should be from the global resource file for the cases, where many clients are interacting
+    private boolean containsNewChanges; // it should be from global resourse file if many people use it
     private DbSet currentDbSet;
 
-    public DbContext(String FILENAME) {
-        this.FILENAME = FILENAME;
-        createFileIfNew();
-        this.containsNewChanges = true;
+    public DbContext(String filename){
+        FILENAME = "/Users/mykhailoselivanov/Documents/growthhungry/computer-systems-and-programming-projects/computer-systems-and-programming/CSP-24-File-Based-Database/src/main/java/oop/filebaseddatabase/" + filename;
+        FileUtil.createFileIfNew(FILENAME);
+        containsNewChanges = true;
     }
 
-    public DbSet GetDatabaseFromFile() {
+    public DbSet GetDatabase() {
         if (containsNewChanges) {
             currentDbSet = new DbSet();
-
-            try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(FILENAME))) {
+            try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(FILENAME))){
                 currentDbSet = (DbSet) objectInputStream.readObject();
             } catch (EOFException e) {
 
-            } catch (Exception e) {
+            }
+            catch(IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
+
             containsNewChanges = false;
-            return currentDbSet;
         }
+
         return currentDbSet;
     }
 
-    public void SaveChangesToFile(DbSet dbSet) {
+    public void SaveChanges(DbSet database) {
         containsNewChanges = true;
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(FILENAME))) {
-            objectOutputStream.writeObject(dbSet);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    private void createFileIfNew() {
-        File file = new File(FILENAME);
-        try {
-            if (file.exists()) {
-                System.out.println(FILENAME + " is exist");
-            } else {
-                file.createNewFile();
-            }
+            objectOutputStream.writeObject(database);
         } catch (IOException e) {
             e.printStackTrace();
         }
